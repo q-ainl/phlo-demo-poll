@@ -1,0 +1,12 @@
+{
+    "resources": [
+        "DB/DB",
+        "DB/model",
+        "DB/JSONDB",
+        "DB/JSON.result",
+        "payload",
+        "phlo.async",
+        "DOM/form"
+    ],
+    "release": "%app/release/"
+}

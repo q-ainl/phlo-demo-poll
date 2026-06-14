@@ -1,0 +1,5 @@
+prop title = 'Phlo Poll'
+
+if (app::route()) return
+%req->async || http_response_code(404)
+view(tag('h1', 'Not found'))

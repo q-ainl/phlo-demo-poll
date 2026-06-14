@@ -1,0 +1,8 @@
+@ extends: model
+
+static table = 'poll'
+static order = 'votes DESC'
+static DB => %JSONDB(data.'poll.json')
+static columns = 'id,option,votes'
+
+static total => array_sum(array_map(fn($row) => (int)$row->votes, static::records()))
