@@ -26,7 +26,7 @@ The poll seeds itself on first load and stores votes in `data/poll.json`.
 This is the poll **without** the realtime step: it works fully as an async
 poll, no WebSocket configuration required. To make votes push live to every
 open tab, see **[phlo-demo-websocket](https://github.com/q-ainl/phlo-demo-websocket)**
-and the [phloWS guide](https://phlo.tech/websocket), which pick up exactly this
+and the [Phlo Realtime guide](https://phlo.tech/websocket), which pick up exactly this
 app and add the realtime layer.
 
 ## License
