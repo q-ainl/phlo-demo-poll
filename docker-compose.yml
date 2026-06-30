@@ -1,0 +1,11 @@
+# Run this demo with Docker; the image bundles the Phlo engine:
+#   docker compose up   ->   http://localhost:8080
+# Voting and results work out of the box. Live cross-tab updates use Phlo
+# Realtime, which runs in the optional Phlo daemon (see the project docs).
+services:
+  app:
+    image: ghcr.io/q-ainl/phlo
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
