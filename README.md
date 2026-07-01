@@ -1,34 +1,36 @@
 # phlo-demo-poll
 
-A tiny realtime-ready poll, built with [Phlo](https://phlo.tech). This is the
-finished app from the [eight-step Phlo Poll tutorial](https://phlo.tech/learn):
-one route serves both a plain browser (POST, redirect, GET) and the Phlo
-frontend (async `apply()` DOM updates), so voting updates the bars without a
-reload and without a line of hand-written JavaScript.
-
-It uses the JSON file driver (`%JSONDB`), so there is no database to set up.
+A realtime poll built with [Phlo](https://phlo.tech) - the finished app from the
+eight-step [Phlo Poll tutorial](https://phlo.tech/learn). One route serves both a
+plain browser (POST, redirect, GET) and the Phlo frontend (async `apply()`), and
+every vote pushes live to all open tabs over Phlo Realtime, with no hand-written
+JavaScript. It uses the JSON file driver (`%JSONDB`), so there is no database to
+set up.
 
 ## Run
 
 ```bash
 git clone https://github.com/q-ainl/phlo-demo-poll.git
-docker run -p 80:80 -v $(pwd)/phlo-demo-poll:/app ghcr.io/q-ainl/phlo
-# open http://localhost
+cd phlo-demo-poll
+docker compose up   # http://localhost:8080
 ```
 
-Or point any FrankenPHP / PHP host at `www/app.php` (it sets `host:` to
-the host set in `www/app.php`; change it to your own).
+Voting and results work out of the box. `cast()` is guarded, so the poll runs
+fully as an async poll even when no daemon is present.
 
-The poll seeds itself on first load and stores votes in `data/poll.json`.
+## Realtime
 
-## Stepped on purpose
+Live cross-tab updates and the `/monitor` presence view use **Phlo Realtime**,
+which runs in the Phlo daemon (a websocket + worker process on port 3001). The
+app sets a `token` cookie, the browser opens `wss://<host>/websocket` (proxied to
+the daemon), and server-side `cast()` POSTs to the daemon so it broadcasts the new
+`#results` to every connected tab. Run the daemon pointed at `www/app.php` and
+proxy `/websocket` to it.
 
-This is the poll **without** the realtime step: it works fully as an async
-poll, no WebSocket configuration required. To make votes push live to every
-open tab, see **[phlo-demo-websocket](https://github.com/q-ainl/phlo-demo-websocket)**
-and the [Phlo Realtime guide](https://phlo.tech/websocket), which pick up exactly this
-app and add the realtime layer.
+## What it shows
+- One route, two transports (plain browser + async `apply()`).
+- Phlo Realtime: `cast()` pushes the new `#results` and the online count to every tab.
+- Presence + a live socket monitor at `/monitor`.
 
 ## License
-
 MIT.

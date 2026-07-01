@@ -6,6 +6,7 @@
 	$text: #c9d1d9
 	$muted: #8b949e
 	$primary: #16c784
+	$warn: #fb8c4b
 }
 *, *::before, *::after {
 	box-sizing: border-box
@@ -22,18 +23,39 @@ body {
 	place-items: center
 	padding: 2rem
 }
-.poll {
+.poll, .monitor {
 	width: 100%
 	max-width: 560px
 }
-.poll h1 {
-	font-size: 1.8rem
-	margin-bottom: .25rem
+h1: font-size: 1.7rem
+h2 {
+	font-size: 1rem
+	color: $muted
+	margin: 1.5rem 0 .5rem
+	text-transform: uppercase
+	letter-spacing: .05em
 }
+.bar-top {
+	display: flex
+	align-items: center
+	justify-content: space-between
+	gap: 1rem
+}
+.badge {
+	background: color-mix(in srgb, $primary 16%, transparent)
+	border: 1px solid color-mix(in srgb, $primary 40%, transparent)
+	border-radius: 999px
+	color: $text
+	font-size: .85rem
+	padding: .25rem .75rem
+	white-space: nowrap
+}
+.badge b: color: $primary
 .lead {
 	color: $muted
-	margin-bottom: 1.5rem
+	margin: .25rem 0 1.5rem
 }
+.lead a, .foot a: color: $primary
 .card {
 	background: $surface
 	border: 1px solid $border
@@ -78,7 +100,6 @@ body {
 	font: inherit
 	font-weight: 600
 	padding: .5rem 1rem
-	transition: background .15s ease
 }
 .choices button:hover: background: color-mix(in srgb, $primary 28%, transparent)
 .foot {
@@ -86,5 +107,55 @@ body {
 	font-size: .85rem
 	margin-top: 1.5rem
 }
-.foot a: color: $primary
+.stat {
+	display: flex
+	align-items: baseline
+	gap: .6rem
+}
+.big {
+	color: $primary
+	font-size: 3rem
+	font-weight: 800
+	line-height: 1
+}
+.lbl: color: $muted
+.feed {
+	list-style: none
+	background: $surface
+	border: 1px solid $border
+	border-radius: 12px
+	padding: .5rem
+	max-height: 360px
+	overflow-y: auto
+}
+.ev-row {
+	display: flex
+	align-items: center
+	gap: .6rem
+	padding: .4rem .5rem
+	border-bottom: 1px solid color-mix(in srgb, $border 60%, transparent)
+	font-size: .9rem
+}
+.ev-row:last-child: border-bottom: 0
+.ev {
+	border-radius: 4px
+	font-size: .7rem
+	font-weight: 700
+	padding: 1px 7px
+	text-transform: uppercase
+}
+.ev.connect {
+	background: color-mix(in srgb, $primary 20%, transparent)
+	color: $primary
+}
+.ev.disconnect {
+	background: color-mix(in srgb, $warn 20%, transparent)
+	color: $warn
+}
+.ev-row code: color: $muted
+.ev-row time {
+	color: $muted
+	margin-left: auto
+	font-size: .8rem
+}
 </style>

@@ -5,8 +5,15 @@
         "DB/JSONDB",
         "DB/JSON.result",
         "payload",
+        "cookies",
+        "security/token",
+        "HTTP",
         "phlo.async",
-        "DOM/form"
+        "tag",
+        "DOM/form",
+        "websocket",
+        "DOM/websocket",
+        "wsCast"
     ],
     "release": "%app/release/"
 }

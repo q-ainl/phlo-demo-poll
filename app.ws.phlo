@@ -1,0 +1,34 @@
+// WebSocket hooks for Phlo Realtime. Phlo Realtime dispatches websocket::<hook> to the Phlo
+// daemon, which runs these functions; cast() guards wsCast so a missing service
+// never breaks a request.
+
+function cast(...$args){
+	try {
+		wsCast(...$args)
+	}
+	catch (\Throwable $e){}
+}
+
+function wsConnect($wsHost, $wsToken, $wsSocket){
+	type_presence::create(socket: $wsSocket, token: substr((string)$wsToken, 0, 8), since: time())
+	wsEvent('connect', $wsSocket)
+	return true
+}
+
+function wsAuth($wsHost, $wsToken, $wsSocket) => true
+
+function wsReceive($wsHost, $wsToken, $wsSocket, ...$data){
+	if (($data['type'] ?? null) === 'ping') cast(wsTarget: $wsSocket, toast: 'pong')
+}
+
+function wsClose($wsHost, $wsToken, $wsSocket){
+	type_presence::delete('socket=?', $wsSocket)
+	wsEvent('disconnect', $wsSocket)
+}
+
+function wsEvent($event, $socket){
+	$short = substr((string)$socket, 0, 10)
+	type_wslog::create(event: $event, socket: $short, ts: time())
+	$row = tag('li', tag('span', $event, class: 'ev '.$event).tag('code', $short).tag('time', date('H:i:s')), class: 'ev-row')
+	cast(wsTarget: 'all', inner: ['#online' => (string)count(type_presence::records())], prepend: ['#feed' => $row])
+}

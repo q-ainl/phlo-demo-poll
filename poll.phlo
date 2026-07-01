@@ -3,15 +3,14 @@ prop question = 'Which stack wins?'
 route GET => $this->home
 
 method home {
+	%cookies->token ??= token(20)
 	$this->seed
 	view($this, 'Phlo Poll')
 }
 
 method seed {
 	if (type_poll::records()) return
-	foreach (['Phlo', 'Svelte', 'Laravel', 'Rails'] AS $option){
-		type_poll::create(option: $option, votes: 0)
-	}
+	foreach (['Phlo', 'Svelte', 'Laravel', 'Rails'] AS $option) type_poll::create(option: $option, votes: 0)
 }
 
 method share($votes) => ($total = type_poll::total()) ? round($votes / $total * 100) : 0
@@ -19,17 +18,21 @@ method share($votes) => ($total = type_poll::total()) ? round($votes / $total * 
 route both POST poll vote $id {
 	if (!$option = type_poll::record(id: (int)$id)) return false
 	type_poll::change('id=?', (int)$id, votes: $option->votes + 1)
+	cast(wsTarget: 'all', outer: ['#results' => $this->results])
 	if (%req->async) return apply(outer: ['#results' => $this->results])
 	location(slash)
 }
 
 view:
 <main#app.poll>
-	<h1>$this->question</h1>
-	<p.lead>One route, two transports. Vote and the bars update without a reload, no JavaScript written. Refresh-safe in any browser.</p>
+	<div.bar-top>
+		<h1>$this->question</h1>
+		<span.badge><b id=online>{{ count(type_presence::records()) }}</b> online</span>
+	</div>
+	<p.lead>Realtime via Phlo Realtime: vote in one tab and every open tab updates. Open the <a href="/monitor">socket monitor</a> to watch connections come and go.</p>
 	{{ $this->results }}
 	{{ $this->choices }}
-	<p.foot>Phlo Poll demo &middot; <a href="https://phlo.tech/learn">build it in eight steps</a> &middot; <a href="https://phlo.tech/websocket">add realtime with Phlo Realtime</a></p>
+	<p.foot>Phlo Poll demo &middot; <a href="https://phlo.tech/learn">build it in eight steps</a> &middot; <a href="https://phlo.tech/websocket">Phlo Realtime guide</a></p>
 </main>
 
 view results:

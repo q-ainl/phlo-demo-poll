@@ -1,4 +1,5 @@
 prop title = 'Phlo Poll'
+prop options = 'wss'
 
 if (app::route()) return
 view(tag('h1', 'Not found'), code: 404)

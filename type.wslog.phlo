@@ -1,0 +1,6 @@
+@ extends: model
+
+static table = 'wslog'
+static order = 'ts DESC'
+static DB => %JSONDB(data.'wslog.json')
+static columns = 'id,event,socket,ts'

@@ -1,0 +1,5 @@
+@ extends: model
+
+static table = 'presence'
+static DB => %JSONDB(data.'presence.json')
+static columns = 'id,socket,token,since'

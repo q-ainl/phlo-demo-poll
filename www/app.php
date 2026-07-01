@@ -5,5 +5,6 @@ phlo_app (
 	host:  'demo.poll.qdev.nl',
 	build: true,
 	debug: true,
-	app:   dirname(__DIR__).'/',
+	app:    dirname(__DIR__).'/',
+	daemon: 3001,
 );
