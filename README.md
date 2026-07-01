@@ -15,8 +15,10 @@ cd phlo-demo-poll
 docker compose up   # http://localhost:8080
 ```
 
-Voting and results work out of the box. `cast()` is guarded, so the poll runs
-fully as an async poll even when no daemon is present.
+`docker compose up` gives live realtime out of the box: the `phlo-daemon` image
+runs FrankenPHP and the Phlo Realtime daemon together, so votes push to every open
+tab. Swap the image for `ghcr.io/q-ainl/phlo` to run the poll as a plain async
+poll (`cast()` is guarded, so it never breaks without a daemon).
 
 ## Realtime
 

@@ -1,11 +1,16 @@
-# Run this demo with Docker; the image bundles the Phlo engine:
+# One `docker compose up` runs the poll with live realtime:
 #   docker compose up   ->   http://localhost:8080
-# Voting and results work out of the box. Live cross-tab updates use Phlo
-# Realtime, which runs in the optional Phlo daemon (see the project docs).
+# The phlo-daemon image runs FrankenPHP plus the Phlo Realtime daemon in one
+# container, so votes push live to every open tab. WS_HOST is the host the browser
+# uses (localhost here). Swap the image for ghcr.io/q-ainl/phlo to run the poll
+# as a plain async poll without realtime.
 services:
   app:
-    image: ghcr.io/q-ainl/phlo
+    image: ghcr.io/q-ainl/phlo-daemon
     ports:
       - "8080:80"
+    environment:
+      SERVER_NAME: ":80"
+      WS_HOST: "localhost"
     volumes:
       - .:/app
