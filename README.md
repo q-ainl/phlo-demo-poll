@@ -7,6 +7,8 @@ every vote pushes live to all open tabs over Phlo Realtime, with no hand-written
 JavaScript. It uses the JSON file driver (`%JSONDB`), so there is no database to
 set up.
 
+![The poll: live results, presence badge and vote buttons](.github/poll.png)
+
 ## Run
 
 ```bash
@@ -23,7 +25,7 @@ poll (`cast()` is guarded, so it never breaks without a daemon).
 ## Realtime
 
 Live cross-tab updates and the `/monitor` presence view use **Phlo Realtime**,
-which runs in the Phlo daemon (a websocket + worker process on port 3001). The
+which runs in the [Phlo Daemon](https://github.com/q-ainl/phlo-daemon) (a websocket + worker process on port 3001). The
 app sets a `token` cookie, the browser opens `wss://<host>/websocket` (proxied to
 the daemon), and server-side `cast()` POSTs to the daemon so it broadcasts the new
 `#results` to every connected tab. Run the daemon pointed at `www/app.php` and
