@@ -14,7 +14,7 @@ set up.
 ```bash
 git clone https://github.com/q-ainl/phlo-demo-poll.git
 cd phlo-demo-poll
-docker compose up   # http://localhost:8080
+docker compose up   # http://localhost
 ```
 
 `docker compose up` gives live realtime out of the box: the `phlo-daemon` image

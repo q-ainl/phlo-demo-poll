@@ -1,5 +1,5 @@
 # One `docker compose up` runs the poll with live realtime:
-#   docker compose up   ->   http://localhost:8080
+#   docker compose up   ->   http://localhost
 # The phlo-daemon image runs FrankenPHP plus the Phlo Realtime daemon in one
 # container, so votes push live to every open tab. WS_HOST is the host the browser
 # uses (localhost here). Swap the image for ghcr.io/q-ainl/phlo to run the poll
@@ -8,7 +8,7 @@ services:
   app:
     image: ghcr.io/q-ainl/phlo-daemon
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       SERVER_NAME: ":80"
       WS_HOST: "localhost"
