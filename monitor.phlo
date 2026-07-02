@@ -16,5 +16,5 @@ view:
 	<p.lead>A live view of Phlo Realtime connections for this app. Open the <a href="/">poll</a> in another tab and watch sockets connect and disconnect; vote and the counts move in real time.</p>
 	<div.stat><span#online.big>{{ count(type_presence::records()) }}</span><span.lbl>connected now</span></div>
 	<h2>Recent socket events</h2>
-	<ul#feed.feed>{{ $this->feed }}</ul>
+	<ul#feed.feed>$this->feed</ul>
 </main>

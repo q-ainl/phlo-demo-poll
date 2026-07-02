@@ -37,22 +37,22 @@ view:
 
 view results:
 <section#results.card>
-<foreach type_poll::records() AS $option>
-	<div.option>
-		<span.name>$option->option</span>
-		<span.votes>$option->votes</span>
-		<div.track>
-			<div.bar style="width: {{ $this->share($option->votes) }}%"></div>
+	<foreach type_poll::records() AS $option>
+		<div.option>
+			<span.name>$option->option</span>
+			<span.votes>$option->votes</span>
+			<div.track>
+				<div.bar style="width: {{ $this->share($option->votes) }}%"></div>
+			</div>
 		</div>
-	</div>
-</foreach>
+	</foreach>
 </section>
 
 view choices:
 <section.card.choices>
-<foreach type_poll::records() AS $option>
-	<form.async method=post action="/poll/vote/$option->id">
-		<button>$option->option</button>
-	</form>
-</foreach>
+	<foreach type_poll::records() AS $option>
+		<form.async method=post action="/poll/vote/$option->id">
+			<button>$option->option</button>
+		</form>
+	</foreach>
 </section>
