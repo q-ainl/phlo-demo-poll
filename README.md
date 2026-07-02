@@ -17,6 +17,8 @@ cd phlo-demo-poll
 docker compose up   # http://localhost
 ```
 
+Port taken, or running a second demo next to this one? Pick any port: `PORT=8081 docker compose up` and open http://localhost:8081.
+
 `docker compose up` gives live realtime out of the box: the `phlo-daemon` image
 runs FrankenPHP and the Phlo Realtime daemon together, so votes push to every open
 tab. Swap the image for `ghcr.io/q-ainl/phlo` to run the poll as a plain async
