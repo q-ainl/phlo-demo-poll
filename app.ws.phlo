@@ -18,7 +18,7 @@ function wsConnect($wsHost, $wsToken, $wsSocket){
 function wsAuth($wsHost, $wsToken, $wsSocket) => true
 
 function wsReceive($wsHost, $wsToken, $wsSocket, ...$data){
-	if (($data['type'] ?? null) === 'ping') cast(wsTarget: $wsSocket, toast: 'pong')
+	if (($data['type'] ?? null) === 'ping') cast(wsTarget: 'socket:'.$wsSocket, toast: 'pong')
 }
 
 function wsClose($wsHost, $wsToken, $wsSocket){
