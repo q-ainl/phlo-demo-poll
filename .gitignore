@@ -7,3 +7,5 @@
 /data/poll.json
 /data/vendor/
 .DS_Store
+/data/presence.json
+/data/wslog.json
